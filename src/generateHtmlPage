@@ -1,0 +1,8 @@
+
+
+
+const generateHtmlPage = (team) => {
+    console.log("generate page")
+    console.log(team)
+}
+module.exports=generateHtmlPage
