@@ -3,9 +3,16 @@ const Manager = require("./lib/Manager")
 const Engineer = require("./lib/Engineer")
 const Intern = require("./lib/Intern")
 const fs = require("fs");
-const { type } = require("os");
+const { type } = require("os")
 let team = []
 const generateHtmlPage = require("./src/generateHtmlPage")
+
+function writeToFile(fileName, data) {
+    fs.writeFile(fileName, data, function (err) {
+        if (err) throw err;
+        console.log('succsesfully created a HTML file!');
+    });
+}
 
 function mainMenu() {
     inquirer.prompt(
@@ -53,7 +60,8 @@ function mainMenu() {
         if (answers.menu == "Finish building the team") {
             console.log("here is your team")
             console.log(team)
-            generateHtmlPage(team)
+            console.log(generateHtmlPage(team))
+            writeToFile("./dist/index.html", generateHtmlPage(team))
         }
         if (answers.menu == "Add Intern") {
             inquirer.prompt(
