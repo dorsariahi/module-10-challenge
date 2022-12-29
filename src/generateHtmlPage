@@ -1,3 +1,4 @@
+const Manager = require("../lib/Manager")
 
 
 
@@ -11,11 +12,11 @@ const generateHtmlPage = (team) => {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     <title>Team Members</title>
 </head>
 <body>
 <div>
-Managername: ${team[0].name}
 ${generateCards(team)}
 </div>
 </body>
@@ -23,8 +24,35 @@ ${generateCards(team)}
 `
 }
 
+function newInfo(teamMember) {
+    if (teamMember.constructor.name == "Manager") {
+        return `Office number: ${teamMember.officeNumber}`
+    }
+    if (teamMember.constructor.name == "Engineer") {
+        return `Github : ${teamMember.github}`
+    }
+    if (teamMember.constructor.name == "Intern") {
+        return `School: ${teamMember.school}`
+    }
+}
+
 const generateCards = (team) => {
-    //this function will make a forloop for the team aray and make a card for the each team member.
+    //this function will make a forloop for the team array and make a card for the each team member.
+    var htmlCards = ""
+    for (let index = 0; index < team.length; index++) {
+        htmlCards += `<div class="flex">
+        <h1>
+        name: ${team[index].name}
+        </h1>
+        <p>
+        id: ${team[index].id}
+        email: ${team[index].email}
+        ${newInfo(team[index])}
+        </p>
+        </div>
+        `
+    }
+    return htmlCards
 }
 
 module.exports = generateHtmlPage
