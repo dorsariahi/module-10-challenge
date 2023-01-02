@@ -42,7 +42,7 @@ const generateCards = (team) => {
     for (let index = 0; index < team.length; index++) {
         htmlCards += `<div class="flex">
         <h1>
-        name: ${team[index].name}
+        ${team[index].constructor.name}: ${team[index].name}
         </h1>
         <p>
         id: ${team[index].id}
